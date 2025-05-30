@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Database" Label="ViolationsRecordingDb" Category="Database" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="dbo" Label="dbo" Category="Schema" Group="Expanded" />
+    <Node Id="Brands" Label="Brands" Category="Table" Group="Collapsed" />
+    <Node Id="Brands_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="Brands_Name" Label="Name nvarchar(42)" Category="NOT NULL" Description="nvarchar(42)" />
+    <Node Id="CarOwners" Label="CarOwners" Category="Table" Group="Collapsed" />
+    <Node Id="CarOwners_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="CarOwners_PersonId" Label="PersonId int" Category="FK" Description="int" />
+    <Node Id="CarOwners_CarId" Label="CarId int" Category="FK" Description="int" />
+    <Node Id="CarOwners_IsOwner" Label="IsOwner bit" Category="NOT NULL" Description="bit" />
+    <Node Id="Cars" Label="Cars" Category="Table" Group="Collapsed" />
+    <Node Id="Cars_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="Cars_ModelId" Label="ModelId int" Category="FK" Description="int" />
+    <Node Id="Cars_ColorId" Label="ColorId int" Category="FK" Description="int" />
+    <Node Id="Cars_ProductionYear" Label="ProductionYear int" Category="NOT NULL" Description="int" />
+    <Node Id="Cars_StateNumberId" Label="StateNumberId int" Category="FK" Description="int" />
+    <Node Id="Cars_InsuranceCost" Label="InsuranceCost float" Category="NOT NULL" Description="float" />
+    <Node Id="Colors" Label="Colors" Category="Table" Group="Collapsed" />
+    <Node Id="Colors_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="Colors_Name" Label="Name nvarchar(32)" Category="NOT NULL" Description="nvarchar(32)" />
+    <Node Id="Models" Label="Models" Category="Table" Group="Collapsed" />
+    <Node Id="Models_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="Models_Name" Label="Name nvarchar(32)" Category="NOT NULL" Description="nvarchar(32)" />
+    <Node Id="Models_BrandId" Label="BrandId int" Category="FK" Description="int" />
+    <Node Id="Persons" Label="Persons" Category="Table" Group="Collapsed" />
+    <Node Id="Persons_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="Persons_Surname" Label="Surname nvarchar(46)" Category="NOT NULL" Description="nvarchar(46)" />
+    <Node Id="Persons_Name" Label="Name nvarchar(32)" Category="NOT NULL" Description="nvarchar(32)" />
+    <Node Id="Persons_Patronymic" Label="Patronymic nvarchar(46)" Category="NOT NULL" Description="nvarchar(46)" />
+    <Node Id="Persons_Passport" Label="Passport nvarchar(12)" Category="NOT NULL" Description="nvarchar(12)" />
+    <Node Id="Persons_PhotoPath" Label="PhotoPath nvarchar(36)" Category="NULL" Description="nvarchar(36)" />
+    <Node Id="StateNumbers" Label="StateNumbers" Category="Table" Group="Collapsed" />
+    <Node Id="StateNumbers_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="StateNumbers_StateNumberName" Label="StateNumberName nvarchar(450)" Category="NOT NULL" Description="nvarchar(450)" />
+    <Node Id="ViolationFacts" Label="ViolationFacts" Category="Table" Group="Collapsed" />
+    <Node Id="ViolationFacts_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="ViolationFacts_CarOwnerId" Label="CarOwnerId int" Category="FK" Description="int" />
+    <Node Id="ViolationFacts_ViolationTypeId" Label="ViolationTypeId int" Category="FK" Description="int" />
+    <Node Id="ViolationFacts_FixationDate" Label="FixationDate datetime2" Category="NOT NULL" Description="datetime2" />
+    <Node Id="ViolationTypes" Label="ViolationTypes" Category="Table" Group="Collapsed" />
+    <Node Id="ViolationTypes_Id" Label="Id int" Category="PK" Description="int" />
+    <Node Id="ViolationTypes_Name" Label="Name nvarchar(450)" Category="NOT NULL" Description="nvarchar(450)" />
+    <Node Id="ViolationTypes_FineAmount" Label="FineAmount float" Category="NOT NULL" Description="float" />
+  </Nodes>
+  <Links>
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="Database" Target="dbo" Category="Contains" />
+    <Link Source="dbo" Target="Brands" Category="Contains" />
+    <Link Source="Brands" Target="Brands_Id" Category="Contains" />
+    <Link Source="Brands" Target="Brands_Name" Category="Contains" />
+    <Link Source="dbo" Target="CarOwners" Category="Contains" />
+    <Link Source="CarOwners" Target="CarOwners_Id" Category="Contains" />
+    <Link Source="CarOwners" Target="CarOwners_PersonId" Category="Contains" />
+    <Link Source="CarOwners" Target="CarOwners_CarId" Category="Contains" />
+    <Link Source="CarOwners" Target="CarOwners_IsOwner" Category="Contains" />
+    <Link Source="CarOwners_CarId" Target="Cars_Id" Label="FK_CarOwners_Cars_CarId" Category="Foreign Key" />
+    <Link Source="CarOwners_PersonId" Target="Persons_Id" Label="FK_CarOwners_Persons_PersonId" Category="Foreign Key" />
+    <Link Source="dbo" Target="Cars" Category="Contains" />
+    <Link Source="Cars" Target="Cars_Id" Category="Contains" />
+    <Link Source="Cars" Target="Cars_ModelId" Category="Contains" />
+    <Link Source="Cars" Target="Cars_ColorId" Category="Contains" />
+    <Link Source="Cars" Target="Cars_ProductionYear" Category="Contains" />
+    <Link Source="Cars" Target="Cars_StateNumberId" Category="Contains" />
+    <Link Source="Cars" Target="Cars_InsuranceCost" Category="Contains" />
+    <Link Source="Cars_ColorId" Target="Colors_Id" Label="FK_Cars_Colors_ColorId" Category="Foreign Key" />
+    <Link Source="Cars_ModelId" Target="Models_Id" Label="FK_Cars_Models_ModelId" Category="Foreign Key" />
+    <Link Source="Cars_StateNumberId" Target="StateNumbers_Id" Label="FK_Cars_StateNumbers_StateNumberId" Category="Foreign Key" />
+    <Link Source="dbo" Target="Colors" Category="Contains" />
+    <Link Source="Colors" Target="Colors_Id" Category="Contains" />
+    <Link Source="Colors" Target="Colors_Name" Category="Contains" />
+    <Link Source="dbo" Target="Models" Category="Contains" />
+    <Link Source="Models" Target="Models_Id" Category="Contains" />
+    <Link Source="Models" Target="Models_Name" Category="Contains" />
+    <Link Source="Models" Target="Models_BrandId" Category="Contains" />
+    <Link Source="Models_BrandId" Target="Brands_Id" Label="FK_Models_Brands_BrandId" Category="Foreign Key" />
+    <Link Source="dbo" Target="Persons" Category="Contains" />
+    <Link Source="Persons" Target="Persons_Id" Category="Contains" />
+    <Link Source="Persons" Target="Persons_Surname" Category="Contains" />
+    <Link Source="Persons" Target="Persons_Name" Category="Contains" />
+    <Link Source="Persons" Target="Persons_Patronymic" Category="Contains" />
+    <Link Source="Persons" Target="Persons_Passport" Category="Contains" />
+    <Link Source="Persons" Target="Persons_PhotoPath" Category="Contains" />
+    <Link Source="dbo" Target="StateNumbers" Category="Contains" />
+    <Link Source="StateNumbers" Target="StateNumbers_Id" Category="Contains" />
+    <Link Source="StateNumbers" Target="StateNumbers_StateNumberName" Category="Contains" />
+    <Link Source="dbo" Target="ViolationFacts" Category="Contains" />
+    <Link Source="ViolationFacts" Target="ViolationFacts_Id" Category="Contains" />
+    <Link Source="ViolationFacts" Target="ViolationFacts_CarOwnerId" Category="Contains" />
+    <Link Source="ViolationFacts" Target="ViolationFacts_ViolationTypeId" Category="Contains" />
+    <Link Source="ViolationFacts" Target="ViolationFacts_FixationDate" Category="Contains" />
+    <Link Source="ViolationFacts_CarOwnerId" Target="CarOwners_Id" Label="FK_ViolationFacts_CarOwners_CarOwnerId" Category="Foreign Key" />
+    <Link Source="ViolationFacts_ViolationTypeId" Target="ViolationTypes_Id" Label="FK_ViolationFacts_ViolationTypes_ViolationTypeId" Category="Foreign Key" />
+    <Link Source="dbo" Target="ViolationTypes" Category="Contains" />
+    <Link Source="ViolationTypes" Target="ViolationTypes_Id" Category="Contains" />
+    <Link Source="ViolationTypes" Target="ViolationTypes_Name" Category="Contains" />
+    <Link Source="ViolationTypes" Target="ViolationTypes_FineAmount" Category="Contains" />
+  </Links>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Table" ValueLabel="True">
+      <Condition Expression="HasCategory('Table')" />
+      <Setter Property="Background" Value="#FFC0C0C0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Schema" ValueLabel="True">
+      <Condition Expression="HasCategory('Schema')" />
+      <Setter Property="Background" Value="#FF7F9169" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="PK" ValueLabel="True">
+      <Condition Expression="HasCategory('PK')" />
+      <Setter Property="Background" Value="#FF008000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="NULL" ValueLabel="True">
+      <Condition Expression="HasCategory('NULL')" />
+      <Setter Property="Background" Value="#FF808040" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="FK" ValueLabel="True">
+      <Condition Expression="HasCategory('FK')" />
+      <Setter Property="Background" Value="#FF8080FF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="NOT NULL" ValueLabel="True">
+      <Condition Expression="HasCategory('NOT NULL')" />
+      <Setter Property="Background" Value="#FFC0A000" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Database" ValueLabel="True">
+      <Condition Expression="HasCategory('Database')" />
+      <Setter Property="Background" Value="#FFFFFFFF" />
+    </Style>
+  </Styles>
+</DirectedGraph>

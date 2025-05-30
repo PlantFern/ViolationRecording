@@ -85,6 +85,8 @@ public partial class Person : INotifyPropertyChanged
         copy._photoPath = orig._photoPath;
     }
 
+    public string FullName => $"{Surname} {Name}.{Patronymic}.";
+
 
     #region Реализация интерфейса INotifyPropertyChanged - специфика WPF
     // Реализация интерфейса: событие зажигается в сеттере свойства
