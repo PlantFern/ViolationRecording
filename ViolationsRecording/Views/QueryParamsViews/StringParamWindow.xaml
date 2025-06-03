@@ -1,0 +1,51 @@
+﻿<Window x:Class="ViolationsRecording.Views.QueryParamsViews.StringParamWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViolationsRecording.Views.QueryParamsViews"
+        mc:Ignorable="d"
+        Title="StringParamWindow"     
+        Width="500"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+    
+        FontSize="16"
+        FontFamily="Consoles">
+    <Grid Style="{DynamicResource MainGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0"
+               x:Name="LblInput"/>
+        <TextBox Grid.Row="0" Grid.Column="1"
+             x:Name="TbxOutput"
+             Padding="4"/>
+
+        <!-- управление -->
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Orientation="Horizontal" Margin="4,12,4,4"
+                HorizontalAlignment="Right">
+            <Button Content="ОК"
+
+                IsDefault="True"
+                Background="GreenYellow"
+                BorderBrush="ForestGreen"
+                Click="OK_Click"/>
+            <Button Content="Отмена"
+
+                Margin="8,0,0,0"
+                FontWeight="Black"
+                IsCancel="True"
+                Background="Red"
+                BorderBrush="Firebrick"/>
+        </StackPanel>
+    </Grid>
+</Window>

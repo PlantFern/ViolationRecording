@@ -6,11 +6,738 @@
         xmlns:local="clr-namespace:ViolationsRecording.Views"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="450" MinHeight="250"
-        Width="800" MinWidth="450"> 
-    <Grid>
-        <Border>
-            
+        Height="450" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        
+        FontSize="16"
+        FontFamily="Consoles"
+        
+        Loaded="WindowLoaded">
+    <Grid Style="{DynamicResource MainGrid}">
+        <Border Style="{DynamicResource MainBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Menu Grid.Row="0">
+                    <MenuItem Header="Файл"
+                              Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="Выход"
+                                  Click="Exit_Click">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/Icons/Exit.png"
+                                       Style="{DynamicResource Icon}"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Вид"
+                              Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="Темы"
+                                  HorizontalContentAlignment="Stretch"
+                                  x:Name="ComboBoxButton">
+                            <MenuItem.Icon>
+                                <Image Source="/Assets/Icons/Theme.png"
+                                       Style="{DynamicResource Icon}"/>
+                            </MenuItem.Icon>
+                            <MenuItem Header="light"
+                                      Click="LightTheme_Click"/>
+                            <MenuItem Header="dark"
+                                      Click="DarkTheme_Click"/>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Таблицы"
+                              Style="{DynamicResource MenuItem}">
+                        <MenuItem Header="Добавить факт нарушения"
+                                  Icon="/Assets/Icon/Create.png"
+                                  Click="AddViolationFact_Click"/>
+                        <Separator/>
+
+                        <MenuItem Header="Бренды"
+                                  Click="GoToBrands_Click"/>
+                        <MenuItem Header="Модели"
+                                  Click="GoToModels_Click"/>
+                        <MenuItem Header="Цвета"
+                                  Click="GoToColors_Click"/>
+                        <MenuItem Header="Цвета"
+                                  Click="GoToStateNumbers_Click"/>
+                        <MenuItem Header="Машины"
+                                  Click="GoToCars_Click"/>
+                        <MenuItem Header="Персоны"
+                                  Click="GoToPersons_Click"/>
+                        <MenuItem Header="Водители"
+                                  Click="GoToCarOwners_Click"/>
+                        <MenuItem Header="Виды нарушений"
+                                  Click="GoToViolationTypes_Click"/>
+                        <MenuItem Header="Факты нарушений"
+                                  Click="GoToViolationFacts_Click"/>
+                    </MenuItem>
+                    <MenuItem Style="{DynamicResource MenuItem}">
+                        <MenuItem.Icon>
+                            <DockPanel Style="{DynamicResource VerticalSeparator}"
+                           Width="1"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Запросы"
+                              Style="{DynamicResource MenuItem}">
+                        <MenuItem.Icon>
+                            <Image Source="/Assets/Icons/Queries.png"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Запрос 1"
+                                  Click="GetCarsWithBrandAndModelAndColor_Click"/>
+                        <MenuItem Header="Запрос 2"
+                                  Click="GetViolationalFactWithFineMoreThan_Click"/>
+                        <MenuItem Header="Запрос 3"
+                                  Click="GetViolationTypeByPassport_Click"/>
+                        <MenuItem Header="Запрос 4"
+                                  Click="GetCarByFixationDateInRange_Click"/>
+                        <MenuItem Header="Запрос 5"
+                                  Click="GetViolationTypeByProductionYear_Click"/>
+                        <MenuItem Header="Запрос 6"
+                                  Click="GetCarWithInsuranceCapitalAmount_Click"/>
+                        
+                        <MenuItem Header="Запрос 7"
+                                  Click="GetGroupByStateNumberWithViolationAmountAndFine_Click"/>
+                        
+                        <MenuItem Header="Запрос 8"
+                                  Click="Query8_Click"/>
+                        <MenuItem Header="Запрос 9"
+                                  Click="Query9_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Карточки"
+                              Click="OpenCards_Click"/>
+                </Menu>
+
+                <ToolBar Grid.Row="1">
+
+                </ToolBar>
+
+                <!--Brand-->
+                <TabControl x:Name="TbcMainWindow"
+                            Grid.Row="2"
+                            Margin="0,4"
+                            Padding="0, 4"
+                            HorizontalAlignment="Stretch">
+                    <TabItem x:Name="TbiBrands">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Бренды"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdBrands"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"
+                                      CanUserResizeRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название бренда"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--Models-->
+                    <TabItem x:Name="TbiModels">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Модель"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdModels"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"
+                                      CanUserResizeRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название модели"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название бренда"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Brand.Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--Colors-->
+                    <TabItem x:Name="TbiColors">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Цвета"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdColors"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"
+                                      CanUserResizeRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название цвета"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <!--StateNumbers-->
+                    <TabItem x:Name="TbiStateNumbers">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Гос. номера"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdStateNumbers"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"
+                                      CanUserResizeRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Номер"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <!--Cars-->
+                    <TabItem x:Name="TbiCars">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Автомобили"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdCars"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Модель"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Model.Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Бренд"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Model.Brand.Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Цвет"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Color.Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Год выпуска"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ProductionYear}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Гос. номер"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=StateNumber.StateNumberName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Страховая стоимость"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding InsuranceCost, StringFormat=N2}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--Persons-->
+                    <TabItem x:Name="TbiPersons">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Персоны"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdPersons"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                        Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Фамилия"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Surname}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Имя"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Отчество"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Patronymic}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Серия/номер паспорта"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Passport}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <!--CarOwners-->
+                    <TabItem x:Name="TbiCarOwners">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Вледельцы автомобилей"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdCarOwners"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      Width="auto"
+                                      GridLinesVisibility="None">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                        Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Водитель"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Person.FullName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Паспорт лица"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Person.Passport}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Машина"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Car.CarData}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Номер машины"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Car.StateNumber.StateNumberName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Признак владельца"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IsOwner}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <!--ViolationTypes-->
+                    <TabItem x:Name="TbiViolationTypes">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Вид нарушения"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdViolationTypes"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"
+                                      CanUserResizeRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название модели"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Название бренда"
+                                                            Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding FineAmount}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+
+                    <!--ViolationFact-->
+                    <TabItem x:Name="TbiViolationFacts">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Факт нарушения"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border Style="{DynamicResource StackPanelBorder}">
+                                <StackPanel Style="{DynamicResource MenuStackPanel}"
+                                            Grid.Row="0"
+                                            Orientation="Horizontal">
+                                    <Button Content="Добавить"
+                                            Style="{DynamicResource MenuButton}"
+                                            Click="AddViolationFact_Click"/>
+                                    <Button Content="Изменить"
+                                            Style="{DynamicResource MenuButton}"
+                                            Click="EditViolationFact_Click"/>
+                                </StackPanel>
+                            </Border>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdViolationFacts"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                      Width="auto"
+                                      GridLinesVisibility="None">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{DynamicResource MenuButton}"
+                                                        Click="EditViolationFact_Click">
+                                                    <Image  Style="{DynamicResource Icon}"
+                                                            Source="/Assets/Icons/Edit.png"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Style="{DynamicResource MenuButton}"
+                                                        Click="DeleteViolationFact_Click">
+                                                    <Image Style="{DynamicResource Icon}"
+                                                           Source="/Assets/Icons/Delete.png"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Id"
+                                                            Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Водитель"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=CarOwner.Person.FullName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Паспорт лица"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=CarOwner.Person.Passport}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Машина"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=CarOwner.Car.CarData}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Номер машины"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=CarOwner.Car.StateNumber.StateNumberName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Признак владельца"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=CarOwner.IsOwner}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Тип нарушения"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=ViolationType.Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Тип нарушения"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=ViolationType.FineAmount, StringFormat={}{0:F2}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Дата фиксации"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding FixationDate, StringFormat=/{0:dd.MM.yyyy/}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    <!--Запросы-->
+                    <TabItem x:Name="TbiQueries">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Запросы"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <!--Запросы все выводятся с помощью DTO-->
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdQueries"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="True"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
+                <StatusBar Grid.Row="3">
+                    <StatusBarItem x:Name="Stb"/>
+                </StatusBar>
+            </Grid>
         </Border>
     </Grid>
 </Window>

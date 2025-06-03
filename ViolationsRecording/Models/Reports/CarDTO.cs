@@ -2,10 +2,10 @@
 
 public record CarDTO
 {
-    public string Brand = string.Empty;
-    public string Model = string.Empty;
-    public string Color = string.Empty;
-    public int ProductionYear;
-    public string StateNumber = string.Empty;
-    public double InsuranceCost;
+    public string Brand { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public string Color { get; set; } = string.Empty;
+    public int ProductionYear { get; set; }
+    public string StateNumber { get; set; } = string.Empty;
+    public double InsuranceCost { get; set; }
 }

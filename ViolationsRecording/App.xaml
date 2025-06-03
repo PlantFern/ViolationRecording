@@ -4,6 +4,56 @@
              xmlns:local="clr-namespace:ViolationsRecording"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/light.xaml"/>
+                <ResourceDictionary Source="Resources/dark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Grid" x:Key="MainGrid">
+                <Setter Property="Margin" Value="4"/>
+            </Style>
+
+            <Style TargetType="Image">
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+            </Style>
+            <Style TargetType="Image" x:Key="Icon">
+                <Setter Property="MaxHeight" Value="24"/>
+                <Setter Property="MaxWidth" Value="24"/>
+                <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                <Setter Property="Stretch" Value="UniformToFill"/>
+            </Style>
+
+            <Style TargetType="TextBlock">
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="8,4"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="8,4"/>
+            </Style>
+
+            <Style TargetType="TextBox">
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="8,4"/>
+            </Style>
+
+            <Style TargetType="DatePicker">
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="8,4"/>
+            </Style>
+
+            <Style TargetType="ComboBox">
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="8,4"/>
+            </Style>
+
+            <Style TargetType="ToolTip">
+                <Setter Property="StaysOpen" Value="False"/>
+                <Setter Property="Placement" Value="Right"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
+
+

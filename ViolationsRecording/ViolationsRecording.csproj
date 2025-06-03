@@ -9,13 +9,39 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Reports\" />
+    <None Remove="Assets\Icons\Create.png" />
+    <None Remove="Assets\Icons\Delete.png" />
+    <None Remove="Assets\Icons\Edit.png" />
+    <None Remove="Assets\Icons\Exit.png" />
+    <None Remove="Assets\Icons\Filter.png" />
+    <None Remove="Assets\Icons\Find.png" />
+    <None Remove="Assets\Icons\Information.png" />
+    <None Remove="Assets\Icons\MainIcon.png" />
+    <None Remove="Assets\Icons\Queries.png" />
+    <None Remove="Assets\Icons\ResultRequest.png" />
+    <None Remove="Assets\Icons\Sort.png" />
+    <None Remove="Assets\Icons\Theme.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="9.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Create.png" />
+    <Resource Include="Assets\Icons\Delete.png" />
+    <Resource Include="Assets\Icons\Edit.png" />
+    <Resource Include="Assets\Icons\Exit.png" />
+    <Resource Include="Assets\Icons\Filter.png" />
+    <Resource Include="Assets\Icons\Find.png" />
+    <Resource Include="Assets\Icons\Information.png" />
+    <Resource Include="Assets\Icons\MainIcon.png" />
+    <Resource Include="Assets\Icons\Queries.png" />
+    <Resource Include="Assets\Icons\ResultRequest.png" />
+    <Resource Include="Assets\Icons\Sort.png" />
+    <Resource Include="Assets\Icons\Theme.png" />
   </ItemGroup>
 
 </Project>

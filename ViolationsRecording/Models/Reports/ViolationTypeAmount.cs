@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ViolationsRecording.Models.Reports;
 
-namespace ViolationsRecording.Models.Reports
+public record ViolationTypeAmount
 {
-    internal class ViolationTypeAmount
-    {
-    }
+    public string Name { get; set; } = string.Empty;
+    public int ViolationCount { get; set; }
 }

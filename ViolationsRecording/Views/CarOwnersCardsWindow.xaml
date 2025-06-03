@@ -1,0 +1,97 @@
+﻿<Window x:Class="ViolationsRecording.Views.CarOwnersCardsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViolationsRecording.Views"
+        mc:Ignorable="d"
+        Title="Карточки водителей" 
+        
+        Height="640" 
+        Width="1200"
+        
+        Icon="/Assets/user_yoda.png"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        
+        Loaded="Window_Load">
+
+    <Window.Resources>
+        <!-- Шаблон отображения карточки клиента -->
+        <DataTemplate x:Key="DataCarOwnerTemplate">
+            <GroupBox Padding="5" 
+                      Margin="10"
+                      BorderBrush="Black" 
+                      BorderThickness="0.8">
+
+                <GroupBox.Header>
+                    <TextBlock FontFamily="Verdna"
+                               FontSize="16"
+                               Text="{Binding Path=Id, StringFormat=Клиент ид: {0}}"/>
+                </GroupBox.Header>
+
+                
+                <StackPanel Margin="10" Orientation="Vertical">
+
+                    <!-- выводим фото персоны -->
+                    <Image Width="180" 
+                           Height="180" 
+                           Source="{Binding Path=Person.PathPhoto}" />
+
+
+                    <TextBlock FontFamily="Verdana" 
+                               FontSize="16"
+                               Padding="0 3"
+                               Text="{Binding Path=Person.FullName, StringFormat=ФИО водителя: {0}}"/>
+
+                    <TextBlock FontFamily="Verdana" 
+                               FontSize="16"
+                               Padding="0 3"
+                               Text="{Binding Path=Person.Passport, StringFormat=Паспорт: {0}}"/>
+
+                    <TextBlock FontFamily="Verdana" 
+                               FontSize="16"
+                               Padding="0 3"
+                               Text="{Binding Path=Car.CarData, StringFormat=Машина: {0}}"/>
+
+                    <TextBlock FontFamily="Verdana" 
+                               FontSize="16"
+                               Padding="0 3"
+                               Text="{Binding Path=IsOwner, StringFormat=Владение: {0}}"/>
+                </StackPanel>
+            </GroupBox>
+
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontFamily="Verdana"
+                   FontSize="22"
+                   Margin="10"
+                   HorizontalAlignment="Center">
+            Клиенты компании
+        </TextBlock>
+
+        <ListBox Grid.Row="1" x:Name="LbxCarOwnersCards"
+                 Margin="10"
+                 Padding="10"
+                 BorderBrush="Black"
+                 BorderThickness="1"
+
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemTemplate="{StaticResource DataCarOwnerTemplate}">
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Margin="10" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+        </ListBox>
+    </Grid>
+</Window>

@@ -7,14 +7,14 @@ using ViolationsRecording.Models.Entities.Configuration;
 namespace ViolationsRecording.Models.Entities;
 
 [EntityTypeConfiguration(typeof(CarConfiguration))]
-public partial class Car : INotifyPropertyChanged
+public class Car : INotifyPropertyChanged
 {
     public int Id { get; set; }
 
     public int ModelId { get; set; }
 
     private Model _model = null!;
-    public Model Model
+    public virtual Model Model
     {
         get => _model;
         set
@@ -90,6 +90,8 @@ public partial class Car : INotifyPropertyChanged
         copy._stateNumber = orig._stateNumber;
         copy._insuranceCost = orig._insuranceCost;
     }
+
+    public string CarData => $"{Model.Brand.Name} {Model.Name} {ProductionYear} {Color.Name}";
 
 
     #region Реализация интерфейса INotifyPropertyChanged - специфика WPF

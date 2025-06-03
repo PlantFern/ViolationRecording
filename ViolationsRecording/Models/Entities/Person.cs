@@ -59,8 +59,8 @@ public partial class Person : INotifyPropertyChanged
         }
     }
 
-    private string _photoPath = string.Empty;
-    public string PhotoPath
+    private string? _photoPath = null!;
+    public string? PhotoPath
     {
         get => _photoPath;
         set
@@ -85,7 +85,7 @@ public partial class Person : INotifyPropertyChanged
         copy._photoPath = orig._photoPath;
     }
 
-    public string FullName => $"{Surname} {Name}.{Patronymic}.";
+    public string FullName => $"{Surname} {Name[0]}.{Patronymic[0]}.";
 
 
     #region Реализация интерфейса INotifyPropertyChanged - специфика WPF

@@ -2,6 +2,6 @@
 
 public record ViolationTypeDTO
 {
-    public string Name = string.Empty;
-    public double FineAmount;
+    public string Name { get; set; } = string.Empty;
+    public double FineAmount { get; set; }
 }

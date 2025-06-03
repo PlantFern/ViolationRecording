@@ -56,6 +56,8 @@ public partial class CarOwner : INotifyPropertyChanged
     public virtual List<ViolationFact> ViolationFacts { get; set; } = null!;
 
 
+    public string CarOwnerData => $"п: {Person.FullName} {Person.Passport}      м: {Car.CarData}";
+
 
     #region Реализация интерфейса INotifyPropertyChanged - специфика WPF
     // Реализация интерфейса: событие зажигается в сеттере свойства
