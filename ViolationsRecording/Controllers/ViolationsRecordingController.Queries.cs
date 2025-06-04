@@ -66,9 +66,8 @@ public partial class ViolationsRecordingController
         .ViolationFacts
         .Where(v => v.ViolationType.FineAmount >= fineAmount)
         .Select(v => new CarOwnerWithViolantialType {
-                     FullName = v.CarOwner.Person.FullName
-                     , Passport = v.CarOwner.Person.Passport
-                     , IsOwner = v.CarOwner.IsOwner
+                     FullName = v.Driver.Person.FullName
+                     , Passport = v.Driver.Person.Passport
                      , ViolationType = v.ViolationType.Name
                      , FineAmount = v.ViolationType.FineAmount})
         .OrderBy(v => v.FineAmount)
@@ -82,7 +81,7 @@ public partial class ViolationsRecordingController
     public List<ViolationTypeDTO> GetViolationTypeByPassport(string passport) =>
         db
         .ViolationFacts
-        .Where(v => v.CarOwner.Person.Passport.Equals(passport))
+        .Where(v => v.Driver.Person.Passport.Equals(passport))
         .Select(v => new ViolationTypeDTO{
                     Name = v.ViolationType.Name
                     , FineAmount = v.ViolationType.FineAmount
@@ -99,12 +98,12 @@ public partial class ViolationsRecordingController
         .ViolationFacts
         .Where(v => v.FixationDate >= lo && v.FixationDate <= hi)
         .Select(v => new CarDTO {
-                    Brand = v.CarOwner.Car.Model.Brand.Name
-                    , Model = v.CarOwner.Car.Model.Name
-                    , Color = v.CarOwner.Car.Color.Name
-                    , ProductionYear = v.CarOwner.Car.ProductionYear
-                    , StateNumber = v.CarOwner.Car.StateNumber.StateNumberName
-                    , InsuranceCost = v.CarOwner.Car.InsuranceCost })
+                    Brand = v.Car.Model.Brand.Name
+                    , Model = v.Car.Model.Name
+                    , Color = v.Car.Color.Name
+                    , ProductionYear = v.Car.ProductionYear
+                    , StateNumber = v.Car.StateNumber.StateNumberName
+                    , InsuranceCost = v.Car.InsuranceCost })
         .ToList();
 
     /* 
@@ -119,13 +118,13 @@ public partial class ViolationsRecordingController
     public List<ViolationFactByProductionYear> GetViolationTypeByProductionYear(int lo, int hi) =>
         db
         .ViolationFacts
-        .Where(v => v.CarOwner.Car.ProductionYear >= lo &&
-                    v.CarOwner.Car.ProductionYear <= hi)
+        .Where(v => v.Car.ProductionYear >= lo &&
+                    v.Car.ProductionYear <= hi)
         .Select(v => new ViolationFactByProductionYear {
                     FixationDate = v.FixationDate
-                    , FullName = v.CarOwner.Person.FullName
-                    , StateNumber = v.CarOwner.Car.StateNumber.StateNumberName
-                    , ProductionYear = v.CarOwner.Car.ProductionYear
+                    , FullName = v.Driver.Person.FullName
+                    , StateNumber = v.Car.StateNumber.StateNumberName
+                    , ProductionYear = v.Car.ProductionYear
                     , ViolationType = v.ViolationType.Name})
         .OrderBy(v => v.ProductionYear)
         .ToList();
@@ -138,16 +137,16 @@ public partial class ViolationsRecordingController
      */
     public List<CarWithInsuranceCapitalAmount> GetCarWithInsuranceCapitalAmount() =>
         db
-        .CarOwners
+        .Cars
         .Select(c => new CarWithInsuranceCapitalAmount {
-                    FullName = c.Person.FullName
-                    , Brand = c.Car.Model.Brand.Name
-                    , Model = c.Car.Model.Name
-                    , Color = c.Car.Color.Name
-                    , ProductionYear = c.Car.ProductionYear
-                    , StateNumber = c.Car.StateNumber.StateNumberName
-                    , InsuranceCost = c.Car.InsuranceCost
-                    , InsuranceCapitalAmount = c.Car.InsuranceCost / (100.0 * 10)})
+                    FullName = c.Owner.FullName
+                    , Brand = c.Model.Brand.Name
+                    , Model = c.Model.Name
+                    , Color = c.Color.Name
+                    , ProductionYear = c.ProductionYear
+                    , StateNumber = c.StateNumber.StateNumberName
+                    , InsuranceCost = c.InsuranceCost
+                    , InsuranceCapitalAmount = c.InsuranceCost / (100.0 * 10)})
         .ToList()
         .OrderBy(c => c.FullName)
         .ToList();
@@ -161,7 +160,7 @@ public partial class ViolationsRecordingController
     public List<ViolationsByStateNumber> GetGroupByStateNumberWithViolationAmountAndFine() =>
         db
         .ViolationFacts
-        .GroupBy(v => new { stateNumber = v.CarOwner.Car.StateNumber.StateNumberName })
+        .GroupBy(v => new { stateNumber = v.Car.StateNumber.StateNumberName })
         .Select(v => new ViolationsByStateNumber{
             StateNumber = v.Key.stateNumber
             , ViolationsCount = v.Count()
@@ -219,7 +218,7 @@ public partial class ViolationsRecordingController
             FROM 
                 CarOwners
             JOIN 
-                Persons ON CarOwners.PersonId = Persons.Id
+                Persons ON CarOwners.DriverId = Persons.Id
             LEFT JOIN 
                 ViolationFacts ON ViolationFacts.CarOwnerId = CarOwners.Id
             LEFT JOIN 

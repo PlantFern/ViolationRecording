@@ -8,8 +8,8 @@ namespace ViolationsRecording.Views;
 /// </summary>
 public partial class CarOwnersCardsWindow : Window
 {
-    private List<CarOwner> _carOwners;
-    public CarOwnersCardsWindow(List<CarOwner> carOwners) {
+    private List<Person> _carOwners;
+    public CarOwnersCardsWindow(List<Person> carOwners) {
         InitializeComponent();
 
         _carOwners = carOwners;

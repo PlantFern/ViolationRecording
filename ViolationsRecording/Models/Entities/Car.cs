@@ -78,10 +78,31 @@ public class Car : INotifyPropertyChanged
     }
 
 
-    public virtual List<CarOwner> CarOwners { get; set; } = new List<CarOwner>();
-    public virtual List<Person> Persons { get; set; } = new List<Person>();
+    public int OwnerId {  get; set; }
+
+    private Person _owner = null!;
+    public virtual Person Owner 
+    {
+        get => _owner;
+
+        set
+        {
+            _owner = value;
+
+            OnPropertyChanged("Owner");
+        }
+    }
 
 
+    // ViolationFacts: вспомогательная сущность для связи "многие ко многим"
+    public virtual List<ViolationFact> ViolationFacts { get; set; } = null!;
+
+    // ViolationTypes и Drivers: Навигационные свойства, связанные через ViolationFacts
+    public virtual List<ViolationType> ViolationTypes { get; set; } = null!;
+    public virtual List<Driver> Drivers { get; set; } = null!;
+
+
+    // 
     public static void Copy(Car orig, Car copy)
     {
         copy._model = orig._model;

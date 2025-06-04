@@ -11,14 +11,15 @@ public class ViolationsRecordingContext : DbContext
     public DbSet<Color> Colors => Set<Color>();
     public DbSet<StateNumber> StateNumbers => Set<StateNumber>();
     public DbSet<Car> Cars => Set<Car>();
+    public DbSet<Driver> Drivers => Set<Driver>();
     public DbSet<Person> Persons => Set<Person>();
-    public DbSet<CarOwner> CarOwners => Set<CarOwner>();
     public DbSet<ViolationType> ViolationTypes => Set<ViolationType>();
     public DbSet<ViolationFact> ViolationFacts => Set<ViolationFact>();
 
 
     public ViolationsRecordingContext()
     {
+        Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 

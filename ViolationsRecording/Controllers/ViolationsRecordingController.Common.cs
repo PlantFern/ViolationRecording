@@ -15,8 +15,8 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
     public List<Color> GetAllColors() => db.Colors.ToList();
     public List<StateNumber> GetAllStateNumbers() => db.StateNumbers.ToList();
     public List<Car> GetAllCars() => db.Cars.ToList();
-    public List<Person> GetAllPersons() => db.Persons.ToList();
-    public List<CarOwner> GetAllCarOwners() => db.CarOwners.ToList();
+    public List<Driver> GetAllPersons() => db.Drivers.ToList();
+    public List<Person> GetAllCarOwners() => db.Persons.ToList();
     public List<ViolationType> GetAllViolationTypes() => db.ViolationTypes.ToList();
     public List<ViolationFact> GetAllViolationFacts() => db.ViolationFacts.ToList();
     #endregion
@@ -53,15 +53,15 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
         db.SaveChanges();
     }
 
-    public void Add(Person person)
+    public void Add(Driver driver)
     {
-        db.Persons.Add(person);
+        db.Drivers.Add(driver);
         db.SaveChanges();
     }
 
-    public void Add(CarOwner carOwner)
+    public void Add(Person person)
     {
-        db.CarOwners.Add(carOwner);
+        db.Persons.Add(person);
         db.SaveChanges();
     }
 
@@ -135,6 +135,17 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
         db.SaveChanges();
     }
 
+    public void Update(Driver driver)
+    {
+        var driver1 = db.Drivers.FirstOrDefault(c => c.Id == driver.Id);
+
+        driver1.DriverLicense = driver.DriverLicense;
+        driver1.Person = driver.Person;
+
+        db.Drivers.Update(driver1);
+        db.SaveChanges();
+    }
+
     public void Update(Person person)
     {
         var person1 = db.Persons.FirstOrDefault(c => c.Id == person.Id);
@@ -146,18 +157,6 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
         person1.PhotoPath = person.PhotoPath;
 
         db.Persons.Update(person1);
-        db.SaveChanges();
-    }
-
-    public void Update(CarOwner carOwner)
-    {
-        var carOwner1 = db.CarOwners.FirstOrDefault(c => c.Id == carOwner.Id);
-
-        carOwner1.Car = carOwner.Car;
-        carOwner1.Person = carOwner.Person;
-        carOwner1.IsOwner = carOwner.IsOwner;
-
-        db.CarOwners.Update(carOwner1);
         db.SaveChanges();
     }
 
@@ -176,7 +175,7 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
     {
         var violationFact1 = db.ViolationFacts.FirstOrDefault(c => c.Id == violationFact.Id);
 
-        violationFact1.CarOwner = violationFact.CarOwner;
+        violationFact1.Driver = violationFact.Driver;
         violationFact1.ViolationType = violationFact.ViolationType;
         violationFact1.FixationDate = violationFact.FixationDate;
 

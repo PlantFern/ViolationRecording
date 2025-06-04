@@ -18,19 +18,36 @@ public class ViolationTypeConfiguration : IEntityTypeConfiguration<ViolationType
         builder
             .ToTable(t => t.HasCheckConstraint("FineAmount", "FineAmount > 0"));
 
+        // Настройка отношения "многие ко многим" между ViolationType и Car
         builder
-        .HasMany(co => co.CarOwners)
-        .WithMany(v => v.ViolationTypes)
+        .HasMany(violationType => violationType.Cars)
+        .WithMany(car => car.ViolationTypes)
         .UsingEntity<ViolationFact>(
-            vf => vf
-            .HasOne(vf1 => vf1.CarOwner)
+            violationFact => violationFact
+            .HasOne(violationFact1 => violationFact1.Car)
             .WithMany(c => c.ViolationFacts)
-            .HasForeignKey(vf1 => vf1.CarOwnerId),
-            vf => vf
-            .HasOne(vf2 => vf2.ViolationType)
-            .WithMany(vt => vt.ViolationFacts)
-            .HasForeignKey(vf2 => vf2.ViolationTypeId)
+            .HasForeignKey(vf1 => vf1.CarId),
+            violationFact => violationFact
+            .HasOne(violationFact2 => violationFact2.ViolationType)
+            .WithMany(violationFact2 => violationFact2.ViolationFacts)
+            .HasForeignKey(violationFact2 => violationFact2.ViolationTypeId)
         );
+
+        // Настройка отношения "многие ко многим" между ViolationType и Driver
+        builder
+        .HasMany(violationType => violationType.Drivers)
+        .WithMany(car => car.ViolationTypes)
+        .UsingEntity<ViolationFact>(
+            violationFact => violationFact
+            .HasOne(violationFact1 => violationFact1.Driver)
+            .WithMany(c => c.ViolationFacts)
+            .HasForeignKey(vf1 => vf1.DriverId),
+            violationFact => violationFact
+            .HasOne(violationFact2 => violationFact2.ViolationType)
+            .WithMany(violationFact2 => violationFact2.ViolationFacts)
+            .HasForeignKey(violationFact2 => violationFact2.ViolationTypeId)
+        );
+
 
         var violationTypes = new List<ViolationType>
         {

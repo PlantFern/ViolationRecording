@@ -5,32 +5,41 @@ using ViolationsRecording.Models.Entities.Configuration;
 
 namespace ViolationsRecording.Models.Entities;
 
-[EntityTypeConfiguration(typeof(ViolationTypeConfiguration))]
-public partial class ViolationType : INotifyPropertyChanged
+
+[EntityTypeConfiguration(typeof(DriverConfiguration))]
+public partial class Driver : INotifyPropertyChanged
 {
     public int Id { get; set; }
 
-    private string _name = string.Empty;
-    public string Name
+
+    private string _driverLicense = string.Empty;
+
+    public string DriverLicense
     {
-        get => _name;
+        get => _driverLicense;
+
         set
         {
-            _name = value;
+            _driverLicense = value;
 
-            OnPropertyChanged("Name");
+            OnPropertyChanged("DriverLicense");
         }
     }
 
-    private double _fineAmount;
-    public double FineAmount
-    {
-        get => _fineAmount;
+
+    public int PersonId { get; set; }
+
+    // Навигационное свойство для связи "один к одному"
+    private Person _person = null!;
+    public virtual Person Person 
+    { 
+        get => _person;
+
         set
         {
-            _fineAmount = value;
+            _person = value;
 
-            OnPropertyChanged("FineAmount");
+            OnPropertyChanged("Person");
         }
     }
 
@@ -38,15 +47,15 @@ public partial class ViolationType : INotifyPropertyChanged
     // ViolationFacts: вспомогательная сущность для связи "многие ко многим"
     public virtual List<ViolationFact> ViolationFacts { get; set; } = null!;
 
-    // Drivers и Cars: Навигационные свойства, связанные через ViolationFacts
+    // ViolationTypes и Cars: Навигационные свойства, связанные через ViolationFacts
+    public virtual List<ViolationType> ViolationTypes { get; set; } = null!;
     public virtual List<Car> Cars { get; set; } = null!;
-    public virtual List<Driver> Drivers { get; set; } = null!;
-    
 
-    public static void Copy(ViolationType orig, ViolationType copy)
+    
+    public void Copy(Driver orig, Driver copy)
     {
-        copy._name = orig._name;
-        copy._fineAmount = orig._fineAmount;
+        copy._driverLicense = orig._driverLicense;
+        copy._person = orig._person;
     }
 
 

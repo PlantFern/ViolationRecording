@@ -11,17 +11,31 @@ public class ViolationFact : INotifyPropertyChanged
 {
     public int Id { get; set; }
 
-    public int CarOwnerId { get; set; }
+    public int DriverId { get; set; }
 
-    private CarOwner _carOwner = null!;
-    public virtual CarOwner CarOwner
+    private Driver _driver = null!;
+    public virtual Driver Driver
     {
-        get => _carOwner;
+        get => _driver;
         set
         {
-            _carOwner = value;
+            _driver = value;
 
-            OnPropertyChanged("CarOwner");
+            OnPropertyChanged("Driver");
+        }
+    }
+
+    public int CarId { get; set; }
+
+    private Car _car = null!;
+    public virtual Car Car
+    {
+        get => _car;
+        set
+        {
+            _car = value;
+
+            OnPropertyChanged("Car");
         }
     }
 
@@ -52,10 +66,13 @@ public class ViolationFact : INotifyPropertyChanged
         }
     }
 
+    // Проверка является ли данный водитель владельцем автомобиля
+    public bool IsOwner => Driver.Person.Passport.Equals(Car.Owner.Passport);
 
     public static void Copy(ViolationFact orig, ViolationFact copy)
     {
-        copy._carOwner = orig._carOwner;
+        copy._driver = orig._driver;
+        copy._car = orig._car;
         copy._violationType = orig._violationType;
         copy._fixationDate = orig._fixationDate;
     }

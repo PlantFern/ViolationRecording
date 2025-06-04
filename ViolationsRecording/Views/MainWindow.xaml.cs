@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         var carOwners = _controller.GetAllCarOwners();
 
         var prefix = "/Assets/CarOwners/";
-        carOwners.ForEach(c => c.Person.PhotoPath = (c.Person.PhotoPath.StartsWith(prefix) ? "" : prefix) + c.Person.PhotoPath);
+        carOwners.ForEach(c => c.Driver.Person.PhotoPath = (c.Driver.Person.PhotoPath.StartsWith(prefix) ? "" : prefix) + c.Driver.Person.PhotoPath);
         var win = new CarOwnersCardsWindow(carOwners.ToList());
 
         win.ShowDialog();

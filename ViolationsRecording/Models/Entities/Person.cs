@@ -72,10 +72,27 @@ public partial class Person : INotifyPropertyChanged
     }
 
 
-    public virtual List<CarOwner> CarOwners { get; set; } = null!;
+    // Навигационное свойство для связи "один к одному"
+    private Driver _driver = null!;
+    public virtual Driver Driver 
+    {
+        get => _driver;
+
+        set
+        {
+            _driver = value;
+
+            OnPropertyChanged("Driver");
+        }
+    }
+
+
+    // навигационное свойство для связи один ко многим
     public virtual List<Car> Cars { get; set; } = null!;
 
 
+    // Копирование для отсутствия преждевременных
+    // изменения элементов в формах
     public static void Copy(Person orig, Person copy)
     {
         copy._surname = orig._surname;
@@ -83,10 +100,10 @@ public partial class Person : INotifyPropertyChanged
         copy._patronymic = orig._patronymic;
         copy._passport = orig._passport;
         copy._photoPath = orig._photoPath;
+        copy._driver = orig._driver;
     }
 
     public string FullName => $"{Surname} {Name[0]}.{Patronymic[0]}.";
-
 
     #region Реализация интерфейса INotifyPropertyChanged - специфика WPF
     // Реализация интерфейса: событие зажигается в сеттере свойства

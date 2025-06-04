@@ -27,20 +27,9 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
             .HasIndex(b => b.Passport)
             .IsUnique();
 
-        // Настройка отношения "многие ко многим" между Car и Client 
         builder
-            .HasMany(c => c.Cars)
-            .WithMany(cl => cl.Persons)
-            .UsingEntity<CarOwner>(
-                carOwner => carOwner
-                .HasOne(carOwner1 => carOwner1.Car)
-                .WithMany(cl => cl.CarOwners)
-                .HasForeignKey(carOwner1 => carOwner1.CarId),
-                carOwner => carOwner
-                .HasOne(carOwner2 => carOwner2.Person)
-                .WithMany(c => c.CarOwners)
-                .HasForeignKey(carOwner2 => carOwner2.PersonId)
-        );
+            .HasIndex(b => b.PhotoPath)
+            .IsUnique();
 
         var persons = new List<Person> {
             new Person
@@ -50,7 +39,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Андрей",
                 Patronymic = "Андреевич",
                 Passport = "6789 012345",
-                PhotoPath = null,
+                PhotoPath = "man_001",
             },
             new Person
             {
@@ -59,7 +48,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Алексей",
                 Patronymic = "Алексеевич",
                 Passport = "7890 123456",
-                PhotoPath = null,
+                PhotoPath = "man_002",
             },
             new Person
             {
@@ -68,16 +57,16 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Павел",
                 Patronymic = "Павлович",
                 Passport = "8901 234567",
-                PhotoPath = null,
+                PhotoPath = "man_003",
             },
-            new Person
+            new Person  
             {
                 Id = 4,
                 Surname = "Крылов",
                 Name = "Максим",
                 Patronymic = "Максимович",
                 Passport = "9012 345678",
-                PhotoPath = null,
+                PhotoPath = "man_004",
             },
             new Person
             {
@@ -86,7 +75,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Олег",
                 Patronymic = "Олегович",
                 Passport = "0123 456789",
-                PhotoPath = null,
+                PhotoPath = "man_005",
             },
             new Person
             {
@@ -95,7 +84,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Фёдор",
                 Patronymic = "Фёдорович",
                 Passport = "1234 567891",
-                PhotoPath = null,
+                PhotoPath = "man_006",
             },
             new Person
             {
@@ -104,7 +93,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Виктор",
                 Patronymic = "Викторович",
                 Passport = "2345 678912",
-                PhotoPath = null,
+                PhotoPath = "man_007",
             },
             new Person
             {
@@ -113,7 +102,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Игорь",
                 Patronymic = "Игоревич",
                 Passport = "3456 789123",
-                PhotoPath = null,
+                PhotoPath = "man_008",
             },
             new Person
             {
@@ -122,7 +111,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Георгий",
                 Patronymic = "Георгиевич",
                 Passport = "4567 890134",
-                PhotoPath = null,
+                PhotoPath = "man_009",
             },
             new Person
             {
@@ -131,7 +120,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Николай",
                 Patronymic = "Николаевич",
                 Passport = "5678 901245",
-                PhotoPath = null,
+                PhotoPath = "man_010",
             },
             new Person
             {
@@ -140,7 +129,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Роман",
                 Patronymic = "Романович",
                 Passport = "6789 012356",
-                PhotoPath = null,
+                PhotoPath = "man_011",
             },
             new Person
             {
@@ -149,7 +138,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Владимир",
                 Patronymic = "Владимирович",
                 Passport = "7890 123467",
-                PhotoPath = null,
+                PhotoPath = "man_012",
             },
             new Person
             {
@@ -158,7 +147,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Тимофей",
                 Patronymic = "Тимофеевич",
                 Passport = "8901 234578",
-                PhotoPath = null,
+                PhotoPath = "man_013",
             },
             new Person
             {
@@ -167,16 +156,16 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
                 Name = "Анатолий",
                 Patronymic = "Анатольевич",
                 Passport = "9012 345689",
-                PhotoPath = null,
+                PhotoPath = "man_014",
             },
             new Person
             {
                 Id = 15,
-                Surname = "Цветков",
-                Name = "Станислав",
-                Patronymic = "Станиславович",
+                Surname = "Цветкова",
+                Name = "Ярослава",
+                Patronymic = "Станиславовна",
                 Passport = "0123 456790",
-                PhotoPath = null,
+                PhotoPath = "woman_004",
             }
         };
         builder.HasData(persons);

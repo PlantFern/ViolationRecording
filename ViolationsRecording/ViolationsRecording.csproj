@@ -44,4 +44,8 @@
     <Resource Include="Assets\Icons\Theme.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Docs\" />
+  </ItemGroup>
+
 </Project>
