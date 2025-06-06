@@ -6,17 +6,19 @@ namespace ViolationsRecording.Views;
 /// <summary>
 /// Логика взаимодействия для ClientsCardsWindow.xaml
 /// </summary>
-public partial class CarOwnersCardsWindow : Window
+public partial class DriversCardsWindow : Window
 {
-    private List<Person> _carOwners;
-    public CarOwnersCardsWindow(List<Person> carOwners) {
+    private List<Driver> _drivers;
+    public DriversCardsWindow(List<Driver> drivers) {
         InitializeComponent();
 
-        _carOwners = carOwners;
+        _drivers = drivers;
     } // ClientsCardsWindow
 
     private void Window_Load(object sender, RoutedEventArgs e) {
-        LbxCarOwnersCards.ItemsSource = _carOwners;
+        LbxDriversCards.ItemsSource = _drivers;
+
+        
         e.Handled = true;
     } // Window_Load
 }

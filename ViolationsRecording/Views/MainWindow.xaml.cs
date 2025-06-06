@@ -30,7 +30,7 @@ public partial class MainWindow : Window
         DgdColors.ItemsSource = _controller.GetAllColors();
         DgdCars.ItemsSource = _controller.GetAllCars();
         DgdPersons.ItemsSource = _controller.GetAllPersons();
-        DgdCarOwners.ItemsSource = _controller.GetAllCarOwners();
+        DgdDrivers.ItemsSource = _controller.GetAllDrivers();
         DgdViolationTypes.ItemsSource = _controller.GetAllViolationTypes();
         DgdViolationFacts.ItemsSource = _controller.GetAllViolationFacts();
 
@@ -42,11 +42,11 @@ public partial class MainWindow : Window
     private void OpenCards_Click(object sender, RoutedEventArgs e)
     {
 
-        var carOwners = _controller.GetAllCarOwners();
+        var drivers = _controller.GetAllDrivers();
 
-        var prefix = "/Assets/CarOwners/";
-        carOwners.ForEach(c => c.Driver.Person.PhotoPath = (c.Driver.Person.PhotoPath.StartsWith(prefix) ? "" : prefix) + c.Driver.Person.PhotoPath);
-        var win = new CarOwnersCardsWindow(carOwners.ToList());
+        var prefix = "/Assets/Drivers/";
+        drivers.ForEach(c => c.Person.PhotoPath = (c.Person.PhotoPath!.StartsWith(prefix) ? "" : prefix) + c.Person.PhotoPath);
+        var win = new DriversCardsWindow(drivers.ToList());
 
         win.ShowDialog();
         e.Handled = true;
@@ -369,6 +369,7 @@ public partial class MainWindow : Window
 
         ResourceDictionary rd = (ResourceDictionary)Application.LoadComponent(uri);
 
+        Application.Current.Resources.MergedDictionaries.Clear();
         Application.Current.Resources.MergedDictionaries.Add(rd);
     }
     #endregion
@@ -406,9 +407,9 @@ public partial class MainWindow : Window
     {
         TbcMainWindow.SelectedItem = TbiPersons;
     }
-    private void GoToCarOwners_Click(object sender, RoutedEventArgs e)
+    private void GoToDrivers_Click(object sender, RoutedEventArgs e)
     {
-        TbcMainWindow.SelectedItem = TbiCarOwners;
+        TbcMainWindow.SelectedItem = TbiDrivers;
     }
     private void GoToViolationTypes_Click(object sender, RoutedEventArgs e)
     {

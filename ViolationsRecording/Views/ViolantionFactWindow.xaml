@@ -27,26 +27,32 @@
 
         <Label Grid.Row="0" Grid.Column="0">Водитель:</Label>
 
-        <ComboBox Name="CbxCarOwner" Grid.Row="0" Grid.Column="1" 
-		         SelectedItem="{Binding CarOwner}"
+        <ComboBox Name="CbxDriver" Grid.Row="0" Grid.Column="1" 
+		         SelectedItem="{Binding Driver}"
                  HorizontalContentAlignment="Left"
                  Padding="4"/>
 
-        <Label Grid.Row="1" Grid.Column="0">Тип нарушения:</Label>
+        <Label Grid.Row="1" Grid.Column="0">Машина:</Label>
+        <ComboBox Name="CbxCar" Grid.Row="1" Grid.Column="1" 
+		         SelectedItem="{Binding Car}"
+                 HorizontalContentAlignment="Left"
+                 Padding="4"/>
+
+        <Label Grid.Row="2" Grid.Column="0">Тип нарушения:</Label>
         
-        <ComboBox Name="CbxViolationType" Grid.Row="1" Grid.Column="1"
+        <ComboBox Name="CbxViolationType" Grid.Row="2" Grid.Column="1"
                   SelectedItem="{Binding ViolationType}"
                   HorizontalContentAlignment="Left"
                   Padding="4"/>
 
-        <Label Grid.Row="2" Grid.Column="0">Дата фиксации:</Label>
-        <DatePicker Grid.Row="2" Grid.Column="1"
+        <Label Grid.Row="3" Grid.Column="0">Дата фиксации:</Label>
+        <DatePicker Grid.Row="3" Grid.Column="1"
                     Name="DpStart" 
                     SelectedDate="{Binding FixationDate}"
                     Padding="4"/>
 
         <!-- управление -->
-        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                     Orientation="Horizontal" Margin="4,12,4,4"
                     HorizontalAlignment="Right">
             <Button Content="ОК"

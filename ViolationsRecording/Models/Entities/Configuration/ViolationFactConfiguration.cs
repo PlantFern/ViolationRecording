@@ -27,7 +27,7 @@ public class ViolationFactConfiguration : IEntityTypeConfiguration<ViolationFact
         builder.ToTable(t => t.HasCheckConstraint("FixationDate", "FixationDate < GetDate()"));
 
         var violationFacts = new List<ViolationFact> {
-            new ViolationFact { Id = 1, DriverId = 1, CarId = 6, ViolationTypeId = 1, FixationDate = DateTime.Parse("12-05-2025") },
+            new ViolationFact { Id = 1, DriverId = 2, CarId = 1, ViolationTypeId = 1, FixationDate = DateTime.Parse("12-05-2025") },
             new ViolationFact { Id = 2, DriverId = 5, CarId = 3, ViolationTypeId = 3, FixationDate = DateTime.Parse("14-05-2025") },
             new ViolationFact { Id = 3, DriverId = 6, CarId = 2, ViolationTypeId = 5, FixationDate = DateTime.Parse("17-05-2025") },
             new ViolationFact { Id = 4, DriverId = 3, CarId = 1, ViolationTypeId = 4, FixationDate = DateTime.Parse("05-05-2025") },

@@ -9,6 +9,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Drivers\man_001.jpg" />
+    <None Remove="Assets\Drivers\man_002.jpg" />
+    <None Remove="Assets\Drivers\man_003.jpg" />
+    <None Remove="Assets\Drivers\man_004.jpg" />
+    <None Remove="Assets\Drivers\man_005.jpg" />
+    <None Remove="Assets\Drivers\man_006.jpg" />
+    <None Remove="Assets\Drivers\man_007.jpg" />
+    <None Remove="Assets\Drivers\man_008.jpg" />
+    <None Remove="Assets\Drivers\man_009.jpg" />
+    <None Remove="Assets\Drivers\man_010.jpg" />
+    <None Remove="Assets\Drivers\man_011.jpg" />
+    <None Remove="Assets\Drivers\man_012.jpg" />
+    <None Remove="Assets\Drivers\man_013.jpg" />
+    <None Remove="Assets\Drivers\man_014.jpg" />
+    <None Remove="Assets\Drivers\woman_001.jpg" />
+    <None Remove="Assets\Drivers\woman_002.jpg" />
+    <None Remove="Assets\Drivers\woman_003.jpg" />
+    <None Remove="Assets\Drivers\woman_004.jpg" />
+    <None Remove="Assets\Drivers\woman_005.jpg" />
+    <None Remove="Assets\Drivers\woman_006.jpg" />
+    <None Remove="Assets\Drivers\woman_007.jpg" />
+    <None Remove="Assets\Drivers\woman_008.jpg" />
+    <None Remove="Assets\Drivers\woman_009.jpg" />
+    <None Remove="Assets\Drivers\woman_010.jpg" />
+    <None Remove="Assets\Drivers\woman_011.jpg" />
+    <None Remove="Assets\Drivers\woman_012.jpg" />
+    <None Remove="Assets\Drivers\woman_013.jpg" />
+    <None Remove="Assets\Drivers\woman_014.jpg" />
     <None Remove="Assets\Icons\Create.png" />
     <None Remove="Assets\Icons\Delete.png" />
     <None Remove="Assets\Icons\Edit.png" />
@@ -30,6 +58,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Drivers\man_001.jpg" />
+    <Resource Include="Assets\Drivers\man_002.jpg" />
+    <Resource Include="Assets\Drivers\man_003.jpg" />
+    <Resource Include="Assets\Drivers\man_004.jpg" />
+    <Resource Include="Assets\Drivers\man_005.jpg" />
+    <Resource Include="Assets\Drivers\man_006.jpg" />
+    <Resource Include="Assets\Drivers\man_007.jpg" />
+    <Resource Include="Assets\Drivers\man_008.jpg" />
+    <Resource Include="Assets\Drivers\man_009.jpg" />
+    <Resource Include="Assets\Drivers\man_010.jpg" />
+    <Resource Include="Assets\Drivers\man_011.jpg" />
+    <Resource Include="Assets\Drivers\man_012.jpg" />
+    <Resource Include="Assets\Drivers\man_013.jpg" />
+    <Resource Include="Assets\Drivers\man_014.jpg" />
+    <Resource Include="Assets\Drivers\woman_001.jpg" />
+    <Resource Include="Assets\Drivers\woman_002.jpg" />
+    <Resource Include="Assets\Drivers\woman_003.jpg" />
+    <Resource Include="Assets\Drivers\woman_004.jpg" />
+    <Resource Include="Assets\Drivers\woman_005.jpg" />
+    <Resource Include="Assets\Drivers\woman_006.jpg" />
+    <Resource Include="Assets\Drivers\woman_007.jpg" />
+    <Resource Include="Assets\Drivers\woman_008.jpg" />
+    <Resource Include="Assets\Drivers\woman_009.jpg" />
+    <Resource Include="Assets\Drivers\woman_010.jpg" />
+    <Resource Include="Assets\Drivers\woman_011.jpg" />
+    <Resource Include="Assets\Drivers\woman_012.jpg" />
+    <Resource Include="Assets\Drivers\woman_013.jpg" />
+    <Resource Include="Assets\Drivers\woman_014.jpg" />
     <Resource Include="Assets\Icons\Create.png" />
     <Resource Include="Assets\Icons\Delete.png" />
     <Resource Include="Assets\Icons\Edit.png" />

@@ -69,7 +69,7 @@
                         <MenuItem Header="Персоны"
                                   Click="GoToPersons_Click"/>
                         <MenuItem Header="Водители"
-                                  Click="GoToCarOwners_Click"/>
+                                  Click="GoToDrivers_Click"/>
                         <MenuItem Header="Виды нарушений"
                                   Click="GoToViolationTypes_Click"/>
                         <MenuItem Header="Факты нарушений"
@@ -281,7 +281,74 @@
                                                             Width="*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
+                                                <TextBlock Text="{Binding StateNumberName}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
+                    
+                    <!--Persons-->
+                    <TabItem x:Name="TbiPersons">
+                        <TabItem.Header>
+                            <Border Style="{DynamicResource TabItemHeader}">
+                                <TextBlock Text="Персоны"/>
+                            </Border>
+                        </TabItem.Header>
+                        <Grid>
+                            <DataGrid Grid.Row="1"
+                                      x:Name="DgdPersons"
+                                      Margin="4"
+                                      IsReadOnly="True"
+                                      AutoGenerateColumns="False"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      GridLinesVisibility="None"
+                                      Width="auto">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Id"
+                                                        Width="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Фамилия"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Surname}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Имя"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
                                                 <TextBlock Text="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Отчество"
+                                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Patronymic}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Серия/номер паспорта"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Passport}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -370,69 +437,12 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                    </TabItem>
 
-                    <!--Persons-->
-                    <TabItem x:Name="TbiPersons">
-                        <TabItem.Header>
-                            <Border Style="{DynamicResource TabItemHeader}">
-                                <TextBlock Text="Персоны"/>
-                            </Border>
-                        </TabItem.Header>
-                        <Grid>
-                            <DataGrid Grid.Row="1"
-                                      x:Name="DgdPersons"
-                                      Margin="4"
-                                      IsReadOnly="True"
-                                      AutoGenerateColumns="False"
-                                      HorizontalScrollBarVisibility="Auto"
-                                      GridLinesVisibility="None"
-                                      Width="auto">
-                                <DataGrid.Columns>
-                                    <DataGridTemplateColumn Header="Id"
-                                                        Width="50">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Id}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Фамилия"
-                                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Surname}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Имя"
-                                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Отчество"
-                                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Patronymic}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Серия/номер паспорта"
+                                    <DataGridTemplateColumn Header="Владелец"
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Passport}"/>
+                                                <TextBlock Text="{Binding Path=Owner.FullName}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -442,16 +452,16 @@
                     </TabItem>
 
 
-                    <!--CarOwners-->
-                    <TabItem x:Name="TbiCarOwners">
+                    <!--Drivers-->
+                    <TabItem x:Name="TbiDrivers">
                         <TabItem.Header>
                             <Border Style="{DynamicResource TabItemHeader}">
-                                <TextBlock Text="Вледельцы автомобилей"/>
+                                <TextBlock Text="Водители"/>
                             </Border>
                         </TabItem.Header>
                         <Grid>
                             <DataGrid Grid.Row="1"
-                                      x:Name="DgdCarOwners"
+                                      x:Name="DgdDrivers"
                                       Margin="4"
                                       IsReadOnly="True"
                                       AutoGenerateColumns="False"
@@ -469,47 +479,20 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
 
+                                    <DataGridTemplateColumn Header="Водительские права"
+                                        Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding DriverLicense}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
                                     <DataGridTemplateColumn Header="Водитель"
                                         Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Path=Person.FullName}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Паспорт лица"
-                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Person.Passport}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Машина"
-                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Car.CarData}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Номер машины"
-                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Car.StateNumber.StateNumberName}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Признак владельца"
-                                        Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding IsOwner}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -640,25 +623,45 @@
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Path=CarOwner.Person.FullName}"/>
+                                                <TextBlock Text="{Binding Path=Driver.FullName}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn Header="Паспорт лица"
+                                    <DataGridTemplateColumn Header="Водительские права"
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Path=CarOwner.Person.Passport}"/>
+                                                <TextBlock Text="{Binding Path=Driver.Person.FullName}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
+                                    
+                                    <DataGridTemplateColumn Header="Паспорт водителя"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path=Driver.Person.Passport}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Признак владельца"
+                                                            IsReadOnly="True"
+                                                            Width="auto">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsOwner, Mode=OneWay}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
 
                                     <DataGridTemplateColumn Header="Машина"
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Path=CarOwner.Car.CarData}"/>
+                                                <TextBlock Text="{Binding Path=Car.CarData}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -667,16 +670,7 @@
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding Path=CarOwner.Car.StateNumber.StateNumberName}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Признак владельца"
-                                                            Width="auto">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=CarOwner.IsOwner}"/>
+                                                <TextBlock Text="{Binding Path=Car.StateNumber.StateNumberName}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -690,7 +684,7 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn Header="Тип нарушения"
+                                    <DataGridTemplateColumn Header="Штраф"
                                                             Width="auto">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>

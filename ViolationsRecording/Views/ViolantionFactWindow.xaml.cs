@@ -20,8 +20,11 @@ public partial class ViolationFactWindow : Window
         ViolationFact.Copy(violationFactData, ViolationFactData);
         this.DataContext = ViolationFactData;
 
-        CbxCarOwner.ItemsSource = controller.GetAllCarOwners();
-        CbxCarOwner.DisplayMemberPath = "CarOwnerData";
+        CbxDriver.ItemsSource = controller.GetAllDrivers();
+        CbxDriver.DisplayMemberPath = "Person.FullName";
+
+        CbxCar.ItemsSource = controller.GetAllCars();
+        CbxCar.DisplayMemberPath = "CarData";
 
         CbxViolationType.ItemsSource = controller.GetAllViolationTypes();
         CbxViolationType.DisplayMemberPath = "Name";

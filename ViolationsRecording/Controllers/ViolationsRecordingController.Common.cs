@@ -15,8 +15,8 @@ public partial class ViolationsRecordingController(ViolationsRecordingContext db
     public List<Color> GetAllColors() => db.Colors.ToList();
     public List<StateNumber> GetAllStateNumbers() => db.StateNumbers.ToList();
     public List<Car> GetAllCars() => db.Cars.ToList();
-    public List<Driver> GetAllPersons() => db.Drivers.ToList();
-    public List<Person> GetAllCarOwners() => db.Persons.ToList();
+    public List<Driver> GetAllDrivers() => db.Drivers.ToList();
+    public List<Person> GetAllPersons() => db.Persons.ToList();
     public List<ViolationType> GetAllViolationTypes() => db.ViolationTypes.ToList();
     public List<ViolationFact> GetAllViolationFacts() => db.ViolationFacts.ToList();
     #endregion

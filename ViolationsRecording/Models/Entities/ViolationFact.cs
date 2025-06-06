@@ -67,7 +67,7 @@ public class ViolationFact : INotifyPropertyChanged
     }
 
     // Проверка является ли данный водитель владельцем автомобиля
-    public bool IsOwner => Driver.Person.Passport.Equals(Car.Owner.Passport);
+    public bool IsOwner => Driver.Person.Id.Equals(Car.Owner.Id);
 
     public static void Copy(ViolationFact orig, ViolationFact copy)
     {
